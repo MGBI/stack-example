@@ -1,0 +1,10 @@
+# This file merged with docker-compose.yml creates a local configuration
+# for starting the local docker-compose project with just simple:
+# $ docker-compose up
+version: '2'
+
+services:
+  alpine:
+    env_file:
+      # all environment variables are from the file
+      - ./shared_vars.env

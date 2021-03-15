@@ -1,0 +1,20 @@
+# This file merged with docker-compose.yml creates a production-like
+# configuration for deploying the Rancher stack.
+# Remember to start Rancher Secrets from Catalog before the deployment!
+version: '2'
+
+secrets:
+  secret-variable:
+    file: secrets/secret-variable.txt
+
+services:
+  alpine:
+    secrets:
+      - secret-variable
+    environment:
+      PUBLIC_VARIABLE: ${PUBLIC_VARIABLE}
+      SECRET_VARIABLE_FILE: /run/secrets/secret-variable
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+    restart: unless-stopped

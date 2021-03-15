@@ -1,0 +1,29 @@
+# This is a base file used in a development configuration (merged with
+# docker-compose.override.yml) and in a production-like configuration
+# (merged with docker-compose.rancher.yml).
+version: '2'
+
+volumes:
+  alpine-data:
+
+services:
+  alpine:
+    image: alpine:edge
+    command: >
+      sh -ce '
+        date > /srv/now.txt
+
+        echo PUBLIC_VARIABLE: $$PUBLIC_VARIABLE
+
+        if [ -n "$$SECRET_VARIABLE_FILE" ]; then
+          SECRET_VARIABLE_FILE_VALUE=`cat $$SECRET_VARIABLE_FILE`
+        fi
+        SECRET_VARIABLE=$${SECRET_VARIABLE:-$$SECRET_VARIABLE_FILE_VALUE}
+        echo SECRET_VARIABLE: $$SECRET_VARIABLE
+
+        echo Sleeping infinitely...
+        sleep infinity'
+    volumes:
+      - alpine-data:/srv
+    # do not wait before sending SIGKILL
+    stop_grace_period: 0s
