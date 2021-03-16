@@ -32,6 +32,12 @@ docker-compose up
 
 ## Containers deployment on Rancher
 (after Environment variables setup)
+
+Use your Rancher Account API Key (it can be shared between projects in different
+environments as well) or create a new one:
+
+Open the Rancher GUI and click in the top panel `API` → `Keys` and then click
+`Add Account API Keys`.
 ```
 // create and fill rancher_cli.env file (ignored by git)
 cp rancher_cli.env.template rancher_cli.env
