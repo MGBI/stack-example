@@ -1,3 +1,4 @@
 *.swp
+.env.rancher
 rancher_cli.env
 shared_vars.env

@@ -13,7 +13,10 @@ fi
 
 source rancher_cli.env
 
+# load and export all defined variables
+set -o allexport
 source shared_vars.env
+set +o allexport
 
 cleanup () {
 	rm -f .env.rancher
@@ -22,10 +25,14 @@ cleanup () {
 
 trap cleanup EXIT
 
-# set variables used in docker-compose files
+# set variables used in docker-compose file
+envsubst < .env.rancher.tmpl > .env.rancher
+
+source .env.rancher
+
+# check variables used in docker-compose files
 test $PUBLIC_VARIABLE
 
-echo PUBLIC_VARIABLE=$PUBLIC_VARIABLE > .env.rancher
 
 create_secrets_files () {(
 	# subshell without printing executed commands
