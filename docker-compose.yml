@@ -11,7 +11,9 @@ services:
     image: alpine:edge
     command: >
       sh -ce '
-        date > /srv/now.txt
+        date > /mnt/now.txt
+        echo The time now is:
+        cat /mnt/now.txt
 
         echo PUBLIC_VARIABLE: $$PUBLIC_VARIABLE
 
@@ -24,6 +26,6 @@ services:
         echo Sleeping infinitely...
         sleep infinity'
     volumes:
-      - alpine-data:/srv
+      - alpine-data:/mnt
     # do not wait before sending SIGKILL
     stop_grace_period: 0s
