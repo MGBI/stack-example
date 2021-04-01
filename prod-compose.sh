@@ -2,12 +2,12 @@
 RANCHER_STACK_NAME=${RANCHER_STACK_NAME:-stack-example}
 
 if [ ! -f rancher_cli.env ]; then
-	echo "Create rancher_cli.env file from rancher_cli.env.template"
+	echo "ERROR: You have to create rancher_cli.env file from rancher_cli.env.template"
 	exit 1
 fi
 
 if [ ! -f shared_vars.env ]; then
-	echo "Create shared_vars.env file from shared_vars.env.template"
+	echo "ERROR: You have to: create shared_vars.env file from shared_vars.env.template"
 	exit 1
 fi
 
