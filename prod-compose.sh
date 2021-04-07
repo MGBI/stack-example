@@ -11,8 +11,6 @@ if [ ! -f shared_vars.env ]; then
 	exit 1
 fi
 
-source rancher_cli.env
-
 # load and export all defined variables
 set -o allexport
 source shared_vars.env
@@ -26,7 +24,7 @@ cleanup () {
 trap cleanup EXIT
 
 # set variables used in docker-compose file
-envsubst < .env.rancher.tmpl > .env.rancher
+envsubst < env.rancher.tmpl > .env.rancher
 
 source .env.rancher
 
@@ -51,6 +49,13 @@ rancher_cli () {
 	rancher --file docker-compose.yml --file docker-compose.rancher.yml \
 		--rancher-file rancher-compose.yml "$@"
 }
+
+# load Rancher access data
+source rancher_cli.env
+
+test $RANCHER_URL
+test $RANCHER_ACCESS_KEY
+test $RANCHER_SECRET_KEY
 
 rancher_cli up -d --stack $RANCHER_STACK_NAME --env-file .env.rancher --pull \
 	--upgrade --confirm-upgrade --description "A simple Rancher stack example"
