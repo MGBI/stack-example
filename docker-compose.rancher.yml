@@ -4,16 +4,16 @@
 version: '2'
 
 secrets:
-  secret-variable:
+  stack-name-secret-variable:
     file: secrets/secret-variable.txt
 
 services:
   alpine:
     secrets:
-      - secret-variable
+      - stack-name-secret-variable
     environment:
       PUBLIC_VARIABLE: ${PUBLIC_VARIABLE}
-      SECRET_VARIABLE_FILE: /run/secrets/secret-variable
+      SECRET_VARIABLE_FILE: /run/secrets/stack-name-secret-variable
     labels:
       # Put the container on a host with label lb=true
       # io.rancher.scheduler.affinity:host_label: lb=true

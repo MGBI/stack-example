@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-RANCHER_STACK_NAME=${RANCHER_STACK_NAME:-stack-example}
+RANCHER_STACK_NAME=${RANCHER_STACK_NAME:-stack-name}
 
 if [ ! -f rancher_cli.env ]; then
 	echo "ERROR: You have to create rancher_cli.env file from rancher_cli.env.template"
