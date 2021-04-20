@@ -6,7 +6,6 @@
 ├── docker-compose.override.yml     # local development configuration only
 ├── docker-compose.rancher.yml      # production-like configuration only
 ├── docker-compose.yml              # common configuration
-├── env.rancher.tmpl                # template for .env.rancher file with all public environment variables
 ├── prod-compose.sh                 # Rancher stack deployment script
 ├── rancher_cli.env                 # Rancher API keys
 └── shared_vars.env                 # the values of all public and secret environment variables
@@ -28,13 +27,12 @@ docker-compose up
 ## Public and secret environment variables for production-like configuration
 (after Environment variables setup)
 ```
-// Add templates for the public variables
-edit env.rancher.tmpl
-// And create secret files in `create_secrets_files` function
+// Check values for the public variables in `check_compose_variables` function.
+// And create secret files in `create_secrets_files` function.
 edit prod-compose.sh
 ```
 As you can see, prod-compose.sh manages the environment variables:
-* Public environment variables will be saved in `.env.rancher` file.
+* Public environment variables will be read from the current environment.
 * Secret environment variables will be saved in separate files in `secrets` directory.
 
 ## Containers deployment on Rancher
